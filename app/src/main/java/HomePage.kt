@@ -5,7 +5,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -15,28 +15,28 @@ import com.example.teyatro.R
 import androidx.compose.foundation.background
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.teyatro.ui.theme.TeyatroTheme
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.draw.clip
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
-
+import components.BottomNavigationBar
 
 @Composable
-fun HomePage() {
+fun HomePage(
+    onNavigateToSearch: () -> Unit = {},
+    onNavigateToWatchlist: () -> Unit = {},
+    onNavigateToMovieDetails: () -> Unit
+) {
     Scaffold(
-        bottomBar = { BottomNavigationBar() }
+        topBar = { HeaderSection() },
+        bottomBar = { BottomNavigationBar(currentRoute = "home") }
     ) { padding ->
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(padding)
         ) {
-            item { HeaderSection() }
             item { SearchBar() }
             item { MovieGrid() }
         }
@@ -220,81 +220,6 @@ fun RegularMovieRows(posters: List<Pair<Int, String>>) {
     }
 }
 
-@Composable
-fun BottomNavigationBar() {
-    NavigationBar(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(Color.Black),
-        containerColor = Color.Black
-    ) {
-        NavigationBarItem(
-            icon = {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_home),
-                    contentDescription = "Home",
-                    modifier = Modifier.size(30.dp)
-                )
-            },
-            selected = true,
-            onClick = { /* Handle click */ },
-            colors = NavigationBarItemDefaults.colors(
-                unselectedIconColor = Color.White,
-                selectedIconColor = Color.White,
-                indicatorColor = Color.Black
-            )
-        )
-        NavigationBarItem(
-            icon = {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_search),
-                    contentDescription = "Search",
-                    modifier = Modifier.size(24.dp)
-                )
-            },
-            selected = false,
-            onClick = { /* Handle click */ },
-            colors = NavigationBarItemDefaults.colors(
-                unselectedIconColor = Color.White,
-                selectedIconColor = Color.White,
-                indicatorColor = Color.Black
-            )
-        )
-        NavigationBarItem(
-            icon = {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_watchlist),
-                    contentDescription = "Watchlist",
-                    modifier = Modifier.size(24.dp)
-                )
-            },
-            selected = false,
-            onClick = { /* Handle click */ },
-            colors = NavigationBarItemDefaults.colors(
-                unselectedIconColor = Color.White,
-                selectedIconColor = Color.White,
-                indicatorColor = Color.Black
-            )
-        )
-        NavigationBarItem(
-            icon = {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_change_language),
-                    contentDescription = "Language",
-                    modifier = Modifier.size(35.dp)
-                )
-            },
-            selected = false,
-            onClick = { /* Handle click */ },
-            colors = NavigationBarItemDefaults.colors(
-                unselectedIconColor = Color.White,
-                selectedIconColor = Color.White,
-                indicatorColor = Color.Black
-            )
-        )
-    }
-}
-
 @Preview(showBackground = true, heightDp = 800)
 @Composable
 fun HomePagePreview() {
@@ -303,7 +228,7 @@ fun HomePagePreview() {
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
         ) {
-            HomePage()
+            HomePage(onNavigateToMovieDetails = {})
         }
     }
 }

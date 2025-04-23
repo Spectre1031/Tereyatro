@@ -1,5 +1,6 @@
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -13,20 +14,32 @@ import androidx.compose.ui.unit.sp
 import com.example.teyatro.R
 import com.example.teyatro.ui.theme.TeyatroTheme
 import androidx.compose.ui.layout.ContentScale
+import components.BottomNavigationBar
+import com.example.teyatro.navigation.Screen
 
 @Composable
-fun WatchlistScreen() {
+fun WatchlistScreen(
+    onBackClick: () -> Unit,
+    onNavigateToMovieDetails: () -> Unit
+) {
     Scaffold(
-        topBar = { WatchlistHeader() },
-        bottomBar = { BottomNavigationBar() },
-        content = { padding ->
-            WatchlistGrid(padding)
+        topBar = { WatchlistHeader(onBackClick = onBackClick) },
+        bottomBar = {
+            BottomNavigationBar(
+                currentRoute = Screen.Watchlist.route,
+                onNavigate = { route -> /* Handle navigation */ }
+            )
         }
-    )
+    ) { padding ->
+        WatchlistGrid(
+            padding = padding,
+            onMovieClick = onNavigateToMovieDetails
+        )
+    }
 }
 
 @Composable
-fun WatchlistHeader() {
+fun WatchlistHeader(onBackClick: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -34,7 +47,7 @@ fun WatchlistHeader() {
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        IconButton(onClick = { /* Handle back */ }) {
+        IconButton(onClick = onBackClick) {
             Icon(
                 painter = painterResource(id = R.drawable.ic_back),
                 contentDescription = "Back",
@@ -61,7 +74,7 @@ fun WatchlistHeader() {
 }
 
 @Composable
-fun WatchlistGrid(padding: PaddingValues) {
+fun WatchlistGrid(padding: PaddingValues, onMovieClick: () -> Unit) {
     val posters = listOf(
         R.drawable.filler_image,
         R.drawable.filler_image,
@@ -86,7 +99,10 @@ fun WatchlistGrid(padding: PaddingValues) {
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
                 row.forEach { poster ->
-                    MoviePosterWithInfo(posterRes = poster)
+                    MoviePosterWithInfo(
+                        posterRes = poster,
+                        onMovieClick = onMovieClick
+                    )
                 }
             }
         }
@@ -94,9 +110,11 @@ fun WatchlistGrid(padding: PaddingValues) {
 }
 
 @Composable
-fun MoviePosterWithInfo(posterRes: Int) {
+fun MoviePosterWithInfo(posterRes: Int, onMovieClick: () -> Unit) {
     Card(
-        modifier = Modifier.padding(8.dp),
+        modifier = Modifier
+            .padding(8.dp)
+            .clickable(onClick = onMovieClick),
         elevation = CardDefaults.cardElevation(4.dp),
         colors = CardDefaults.cardColors(containerColor = Color.White),
         shape = MaterialTheme.shapes.medium
@@ -143,83 +161,11 @@ fun WatchlistScreenPreview() {
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
         ) {
-            WatchlistScreen()
+            WatchlistScreen(
+                onBackClick = {},
+                onNavigateToMovieDetails = {}
+            )
         }
-    }
-}
-
-@Composable
-fun BottomNavigationBar() {
-    NavigationBar(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(Color.Black),
-        containerColor = Color.Black
-    ) {
-        NavigationBarItem(
-            icon = {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_home),
-                    contentDescription = "Home",
-                    modifier = Modifier.size(30.dp)
-                )
-            },
-            selected = true,
-            onClick = { /* Handle click */ },
-            colors = NavigationBarItemDefaults.colors(
-                unselectedIconColor = Color.White,
-                selectedIconColor = Color.White,
-                indicatorColor = Color.Black
-            )
-        )
-        NavigationBarItem(
-            icon = {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_search),
-                    contentDescription = "Search",
-                    modifier = Modifier.size(24.dp)
-                )
-            },
-            selected = false,
-            onClick = { /* Handle click */ },
-            colors = NavigationBarItemDefaults.colors(
-                unselectedIconColor = Color.White,
-                selectedIconColor = Color.White,
-                indicatorColor = Color.Black
-            )
-        )
-        NavigationBarItem(
-            icon = {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_watchlist),
-                    contentDescription = "Watchlist",
-                    modifier = Modifier.size(24.dp)
-                )
-            },
-            selected = false,
-            onClick = { /* Handle click */ },
-            colors = NavigationBarItemDefaults.colors(
-                unselectedIconColor = Color.White,
-                selectedIconColor = Color.White,
-                indicatorColor = Color.Black
-            )
-        )
-        NavigationBarItem(
-            icon = {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_change_language),
-                    contentDescription = "Language",
-                    modifier = Modifier.size(35.dp)
-                )
-            },
-            selected = false,
-            onClick = { /* Handle click */ },
-            colors = NavigationBarItemDefaults.colors(
-                unselectedIconColor = Color.White,
-                selectedIconColor = Color.White,
-                indicatorColor = Color.Black
-            )
-        )
     }
 }
 
@@ -227,7 +173,7 @@ fun BottomNavigationBar() {
 @Composable
 fun WatchlistHeaderPreview() {
     TeyatroTheme {
-        WatchlistHeader()
+        WatchlistHeader(onBackClick = {})
     }
 }
 
@@ -235,7 +181,10 @@ fun WatchlistHeaderPreview() {
 @Composable
 fun WatchlistGridPreview() {
     TeyatroTheme {
-        WatchlistGrid(PaddingValues(16.dp))
+        WatchlistGrid(
+            padding = PaddingValues(16.dp),
+            onMovieClick = {}
+        )
     }
 }
 
@@ -243,6 +192,9 @@ fun WatchlistGridPreview() {
 @Composable
 fun MoviePosterWithInfoPreview() {
     TeyatroTheme {
-        MoviePosterWithInfo(posterRes = R.drawable.filler_image)
+        MoviePosterWithInfo(
+            posterRes = R.drawable.filler_image,
+            onMovieClick = {}
+        )
     }
 }
