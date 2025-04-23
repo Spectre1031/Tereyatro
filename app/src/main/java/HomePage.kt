@@ -70,7 +70,7 @@ fun SearchBar() {
         onValueChange = { query = it },
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 8.dp, vertical = 8.dp)
+            .padding(horizontal = 16.dp, vertical = 16.dp)
             .height(48.dp),
         placeholder = {
             Text(
@@ -152,7 +152,7 @@ fun FeaturedMovieRow(posters: List<Pair<Int, String>>) {
     LazyRow(
         modifier = Modifier.fillMaxWidth(),
         contentPadding = PaddingValues(horizontal = 8.dp),
-        horizontalArrangement = Arrangement.spacedBy(16.dp) // Added spacing between items
+        horizontalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         items(posters) { (poster, title) ->
             Column(
@@ -181,13 +181,13 @@ fun FeaturedMovieRow(posters: List<Pair<Int, String>>) {
 @Composable
 fun RegularMovieRows(posters: List<Pair<Int, String>>) {
     Column(
-        verticalArrangement = Arrangement.spacedBy(16.dp) // Added spacing between rows
+        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         repeat(3) { rowIndex ->
             LazyRow(
                 modifier = Modifier.fillMaxWidth(),
                 contentPadding = PaddingValues(horizontal = 8.dp),
-                horizontalArrangement = Arrangement.spacedBy(16.dp) // Added spacing between items
+                horizontalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 items(posters) { (poster, title) ->
                     Column(
@@ -304,38 +304,6 @@ fun HomePagePreview() {
             color = MaterialTheme.colorScheme.background
         ) {
             HomePage()
-        }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun HeaderSectionPreview() {
-    TeyatroTheme {
-        HeaderSection()
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun SearchBarPreview() {
-    TeyatroTheme {
-        SearchBar()
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun ContentRowPreview() {
-    TeyatroTheme {
-        val samplePosters = listOf(
-            Pair(R.drawable.filler_image, "Sample Movie 1"),
-            Pair(R.drawable.filler_image, "Sample Movie 2"),
-            Pair(R.drawable.filler_image, "Sample Movie 3")
-        )
-        Column {
-            FeaturedMovieRow(posters = samplePosters)
-            RegularMovieRows(posters = samplePosters)
         }
     }
 }

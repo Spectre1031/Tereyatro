@@ -1,7 +1,6 @@
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -13,29 +12,51 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.teyatro.R
 import com.example.teyatro.ui.theme.TeyatroTheme
+import androidx.compose.ui.layout.ContentScale
 
 @Composable
 fun WatchlistScreen() {
     Scaffold(
         topBar = { WatchlistHeader() },
         bottomBar = { BottomNavigationBar() },
-        content = { padding -> WatchlistGrid(padding) }
+        content = { padding ->
+            WatchlistGrid(padding)
+        }
     )
 }
 
 @Composable
 fun WatchlistHeader() {
-    Box(
+    Row(
         modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp),
-        contentAlignment = Alignment.Center
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
     ) {
+        IconButton(onClick = { /* Handle back */ }) {
+            Icon(
+                painter = painterResource(id = R.drawable.ic_back),
+                contentDescription = "Back",
+                modifier = Modifier.size(30.dp),
+                tint = Color.Black
+            )
+        }
+
         Text(
             text = "NAME'S WATCHLIST!",
-            style = MaterialTheme.typography.headlineMedium.copy(fontSize = 24.sp),
+            style = MaterialTheme.typography.headlineMedium.copy(fontSize = 18.sp),
             color = Color.Black
         )
+
+        IconButton(onClick = { /* Handle edit */ }) {
+            Icon(
+                painter = painterResource(id = R.drawable.ic_edit),
+                contentDescription = "Edit",
+                modifier = Modifier.size(24.dp),
+                tint = Color.Black
+            )
+        }
     }
 }
 
@@ -64,7 +85,7 @@ fun WatchlistGrid(padding: PaddingValues) {
                     .padding(vertical = 8.dp),
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
-                row.forEach { poster: Int ->
+                row.forEach { poster ->
                     MoviePosterWithInfo(posterRes = poster)
                 }
             }
@@ -74,29 +95,40 @@ fun WatchlistGrid(padding: PaddingValues) {
 
 @Composable
 fun MoviePosterWithInfo(posterRes: Int) {
-    Box(
-        modifier = Modifier.wrapContentSize(),
-        contentAlignment = Alignment.BottomCenter
+    Card(
+        modifier = Modifier.padding(8.dp),
+        elevation = CardDefaults.cardElevation(4.dp),
+        colors = CardDefaults.cardColors(containerColor = Color.White),
+        shape = MaterialTheme.shapes.medium
     ) {
-        Column(
-            modifier = Modifier.padding(horizontal = 8.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
+        Box(
+            modifier = Modifier.wrapContentSize(),
+            contentAlignment = Alignment.BottomCenter
         ) {
-            Image(
-                painter = painterResource(id = posterRes),
-                contentDescription = "Movie Poster",
-                modifier = Modifier.size(120.dp)
-            )
-            Surface(
-                shape = CircleShape,
-                color = Color.Black,
-                modifier = Modifier.size(24.dp)
+            Column(
+                modifier = Modifier.padding(8.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
+                Card(
+                    modifier = Modifier.size(120.dp),
+                    elevation = CardDefaults.cardElevation(4.dp),
+                    shape = MaterialTheme.shapes.medium
+                ) {
+                    Image(
+                        painter = painterResource(id = posterRes),
+                        contentDescription = "Movie Poster",
+                        modifier = Modifier.fillMaxSize(),
+                        contentScale = ContentScale.FillBounds
+                    )
+                }
+                Spacer(modifier = Modifier.height(8.dp))
                 Icon(
                     painter = painterResource(id = R.drawable.ic_alert),
                     contentDescription = "Info Icon",
-                    tint = Color.White,
-                    modifier = Modifier.padding(4.dp)
+                    tint = Color.Black,
+                    modifier = Modifier
+                        .size(24.dp)
+                        .padding(4.dp)
                 )
             }
         }
