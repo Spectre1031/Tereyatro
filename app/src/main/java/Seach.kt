@@ -35,14 +35,14 @@ fun SearchScreen(
     ) { padding ->
         Column(
             modifier = Modifier
-                .fillMaxSize()
+                .fillMaxWidth()
                 .background(MaterialTheme.colorScheme.background)
                 .padding(padding)
         ) {
             SearchHeader(onBackClick = onBackClick)
-            Spacer(modifier = Modifier.height(8.dp))
-            SearchBar()
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(10.dp))
+            SearchBar(modifier = Modifier.height(40.dp))
+            Spacer(modifier = Modifier.height(10.dp))
             SearchContent()
         }
     }
@@ -76,7 +76,7 @@ private fun SearchHeader(onBackClick: () -> Unit) {
             Icon(
                 painter = painterResource(id = R.drawable.ic_watchlist),
                 contentDescription = "Watchlist",
-                modifier = Modifier.size(24.dp),
+                modifier = Modifier.size(25.dp),
                 tint = MaterialTheme.colorScheme.onBackground
             )
         }
@@ -84,7 +84,7 @@ private fun SearchHeader(onBackClick: () -> Unit) {
 }
 
 @Composable
-private fun SearchBar() {
+private fun SearchBar(modifier: Modifier = Modifier) {
     var query by remember { mutableStateOf("") }
 
     OutlinedTextField(
@@ -92,10 +92,12 @@ private fun SearchBar() {
         onValueChange = { query = it },
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp),
+            .height(50.dp)
+            .padding(horizontal = 10.dp),
+
         placeholder = {
             Text(
-                "Search...",
+                "Search",
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -125,7 +127,7 @@ private fun SearchBar() {
         textStyle = MaterialTheme.typography.bodyMedium.copy(
             color = MaterialTheme.colorScheme.onSurface
         ),
-        shape = RoundedCornerShape(24.dp),
+        shape = RoundedCornerShape(25.dp),
         colors = OutlinedTextFieldDefaults.colors(
             unfocusedBorderColor = Color.Black,
             focusedBorderColor = Color.Black
@@ -139,7 +141,7 @@ private fun SearchContent() {
         modifier = Modifier.fillMaxSize()
     ) {
         Text(
-            text = "Latest in Teyatro",
+            text = "Have You Seen This Movie?",
             style = MaterialTheme.typography.titleLarge,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(start = 16.dp, top = 24.dp, bottom = 8.dp),

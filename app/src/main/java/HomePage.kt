@@ -1,4 +1,4 @@
-package com.example.teyatro.screens
+package com.example.teyatro.navigation
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn

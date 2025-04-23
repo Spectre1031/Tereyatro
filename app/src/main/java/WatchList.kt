@@ -1,3 +1,5 @@
+package com.example.teyatro.navigation
+
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -16,6 +18,13 @@ import com.example.teyatro.ui.theme.TeyatroTheme
 import androidx.compose.ui.layout.ContentScale
 import components.BottomNavigationBar
 import com.example.teyatro.navigation.Screen
+import com.example.teyatro.navigation.*
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import com.example.teyatro.navigation.NavGraph
+
 
 @Composable
 fun WatchlistScreen(
@@ -110,7 +119,7 @@ fun WatchlistGrid(padding: PaddingValues, onMovieClick: () -> Unit) {
 }
 
 @Composable
-fun MoviePosterWithInfo(posterRes: Int, onMovieClick: () -> Unit) {
+fun MoviePosterWithInfo(posterRes: Int, onMovieClick: () -> Unit, ) {
     Card(
         modifier = Modifier
             .padding(8.dp)
@@ -153,6 +162,17 @@ fun MoviePosterWithInfo(posterRes: Int, onMovieClick: () -> Unit) {
     }
 }
 
+@Composable
+fun MovieInfo(
+
+    onMovieClick: () -> Unit,
+    onNavigateToMovieDetails: () -> Unit)
+{
+    Button(onMovieClick) {
+        val navController = rememberNavController()
+        NavGraph(navController = navController)
+    }
+}
 @Preview(showBackground = true, heightDp = 800)
 @Composable
 fun WatchlistScreenPreview() {

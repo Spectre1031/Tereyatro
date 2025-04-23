@@ -1,3 +1,5 @@
+package com.example.teyatro
+
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -250,8 +252,7 @@ private fun ActorCard(index: Int) {
         modifier = Modifier
             .width(100.dp)
             .height(160.dp),
-        elevation = CardDefaults.cardElevation(4.dp),
-        shape = RoundedCornerShape(8.dp)
+        elevation = CardDefaults.cardElevation(4.dp)
     ) {
         Column {
             Box(

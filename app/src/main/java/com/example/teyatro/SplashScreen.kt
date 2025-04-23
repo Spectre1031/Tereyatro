@@ -1,4 +1,4 @@
-package com.example.teyatro.screens
+package com.example.teyatro.navigation
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
@@ -26,7 +26,9 @@ fun SplashNavigation() {
             SplashScreenContent(navController = navController)
         }
         composable("main") {
-            HomePage()
+            HomePage(
+                onNavigateToMovieDetails = { /* TODO: implement navigation */ }
+            )
         }
     }
 }
