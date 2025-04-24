@@ -94,7 +94,7 @@ fun Header(onBackClick: () -> Unit) {
             Icon(
                 painter = painterResource(id = R.drawable.ic_back),
                 contentDescription = "Back",
-                tint = Color.Black,
+                tint = Color.Red,
                 modifier = Modifier.size(30.dp)
             )
         }
@@ -108,7 +108,7 @@ fun Header(onBackClick: () -> Unit) {
             Icon(
                 painter = painterResource(id = R.drawable.ic_watchlist),
                 contentDescription = "Add to Watchlist",
-                tint = Color.Black,
+                tint = Color.Red,
                 modifier = Modifier.size(30.dp)
             )
         }
@@ -268,16 +268,6 @@ private fun ActorCard(index: Int) {
                 )
             }
 
-            Text(
-                text = "Actor ${index + 1}",
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(8.dp),
-                style = MaterialTheme.typography.bodySmall,
-                color = Color.Black,
-                maxLines = 2,
-                lineHeight = 16.sp
-            )
         }
     }
 }
@@ -294,7 +284,7 @@ fun PostersByDatesSection() {
                 text = "2022 Entries",
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold,
-                color = Color.Black,
+                color = Color.Red,
                 modifier = Modifier.padding(bottom = 8.dp)
             )
             MoviePosterRow(4)
@@ -304,7 +294,7 @@ fun PostersByDatesSection() {
                 text = "2023 Entries",
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold,
-                color = Color.Black,
+                color = Color.Red,
                 modifier = Modifier.padding(bottom = 8.dp)
             )
             MoviePosterRow(4)
@@ -321,14 +311,14 @@ fun MoviePosterRowPreview() {
                 text = "2022 Entries",
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold,
-                color = Color.Black
+                color = Color.Red
             )
             MoviePosterRow(4)
             Text(
                 text = "2023 Entries",
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold,
-                color = Color.Black
+                color = Color.Red
             )
             MoviePosterRow(4)
         }

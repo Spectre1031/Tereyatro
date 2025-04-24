@@ -65,7 +65,7 @@ private fun SearchHeader(onBackClick: () -> Unit) {
                 painter = painterResource(id = R.drawable.ic_back),
                 contentDescription = "Back",
                 modifier = Modifier.size(24.dp),
-                tint = MaterialTheme.colorScheme.onBackground
+                tint = Color.Red
             )
         }
 
@@ -77,7 +77,7 @@ private fun SearchHeader(onBackClick: () -> Unit) {
                 painter = painterResource(id = R.drawable.ic_watchlist),
                 contentDescription = "Watchlist",
                 modifier = Modifier.size(25.dp),
-                tint = MaterialTheme.colorScheme.onBackground
+                tint = Color.Red
             )
         }
     }
@@ -118,7 +118,7 @@ private fun SearchBar(modifier: Modifier = Modifier) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_filter),
                     contentDescription = "Filter",
-                    tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                    tint = Color.Red,
                     modifier = Modifier.size(20.dp)
                 )
             }

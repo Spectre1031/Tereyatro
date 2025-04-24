@@ -141,7 +141,7 @@ fun MovieGrid() {
         Text(
             text = "Regular Movies",
             style = MaterialTheme.typography.titleMedium,
-            modifier = Modifier.padding(bottom = 8.dp)
+            modifier = Modifier.padding(bottom = 5.dp)
         )
         RegularMovieRows(regularPosters)
     }

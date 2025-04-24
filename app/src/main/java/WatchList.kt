@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.sp
 import com.example.teyatro.R
 import com.example.teyatro.ui.theme.TeyatroTheme
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.FontWeight
 import components.BottomNavigationBar
 import com.example.teyatro.navigation.Screen
 import com.example.teyatro.navigation.*
@@ -61,14 +62,14 @@ fun WatchlistHeader(onBackClick: () -> Unit) {
                 painter = painterResource(id = R.drawable.ic_back),
                 contentDescription = "Back",
                 modifier = Modifier.size(30.dp),
-                tint = Color.Black
+                tint = Color.Red
             )
         }
 
         Text(
             text = "NAME'S WATCHLIST!",
-            style = MaterialTheme.typography.headlineMedium.copy(fontSize = 18.sp),
-            color = Color.Black
+            style = MaterialTheme.typography.headlineMedium.copy(fontSize = 18.sp, fontWeight = FontWeight.Bold),
+            color = Color.Red
         )
 
         IconButton(onClick = { /* Handle edit */ }) {
@@ -76,7 +77,7 @@ fun WatchlistHeader(onBackClick: () -> Unit) {
                 painter = painterResource(id = R.drawable.ic_edit),
                 contentDescription = "Edit",
                 modifier = Modifier.size(24.dp),
-                tint = Color.Black
+                tint = Color.Red
             )
         }
     }
@@ -152,7 +153,7 @@ fun MoviePosterWithInfo(posterRes: Int, onMovieClick: () -> Unit, ) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_alert),
                     contentDescription = "Info Icon",
-                    tint = Color.Black,
+                    tint = Color.Red,
                     modifier = Modifier
                         .size(24.dp)
                         .padding(4.dp)

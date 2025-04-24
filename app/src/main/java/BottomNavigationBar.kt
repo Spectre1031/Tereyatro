@@ -23,8 +23,8 @@ fun BottomNavigationBar(
     NavigationBar(
         modifier = Modifier
             .fillMaxWidth()
-            .background(Color.Black),
-        containerColor = Color.Black
+            .background(Color.Red),
+        containerColor = Color.Red
     ) {
         val navigationItems = listOf(
             NavigationItem(
@@ -67,7 +67,7 @@ fun BottomNavigationBar(
                 colors = NavigationBarItemDefaults.colors(
                     unselectedIconColor = Color.White,
                     selectedIconColor = Color.White,
-                    indicatorColor = Color.Black
+                    indicatorColor = Color.Red
                 )
             )
         }
